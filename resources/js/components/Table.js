@@ -12,6 +12,11 @@ export default class Table extends Component {
 
     componentDidMount() {
         let url = "./api/spacex";
+
+        if(this.props.year) {
+            url += '/' + this.props.year;
+        }
+
         fetch(url)
             .then(res => res.json())
             .then(
@@ -62,7 +67,6 @@ export default class Table extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-
                                 {data.map(launch=>(
                                     <tr className="bg-white" key={launch.flight_number}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -79,7 +83,6 @@ export default class Table extends Component {
                                         </td>
                                     </tr>
                                 ))}
-                                
                             </tbody>
                         </table>
                     </div>

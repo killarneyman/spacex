@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import Table from './Table';
 
 export default class SpaceX extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            year: null,
+        };
+    }
     render() {
         return (
             <div className="container">
@@ -15,7 +21,7 @@ export default class SpaceX extends Component {
                         </button>
                     </div>
                 </form>
-                <Table />
+                <Table year={this.state.year} />
             </div>
         );
     }

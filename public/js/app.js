@@ -65966,10 +65966,16 @@ var SpaceX = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(SpaceX);
 
-  function SpaceX() {
+  function SpaceX(props) {
+    var _this;
+
     _classCallCheck(this, SpaceX);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      year: null
+    };
+    return _this;
   }
 
   _createClass(SpaceX, [{
@@ -65995,7 +66001,9 @@ var SpaceX = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      }, "Search"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }, "Search"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        year: this.state.year
+      }));
     }
   }]);
 
@@ -66071,6 +66079,11 @@ var Table = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       var url = "./api/spacex";
+
+      if (this.props.year) {
+        url += '/' + this.props.year;
+      }
+
       fetch(url).then(function (res) {
         return res.json();
       }).then(function (result) {
