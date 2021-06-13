@@ -65980,13 +65980,13 @@ var SpaceX = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "mt-8 sm:flex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "for": "emailAddress",
+        htmlFor: "emailAddress",
         className: "sr-only"
       }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "emailAddress",
         name: "email",
         type: "email",
-        autocomplete: "email",
+        autoComplete: "email",
         required: true,
         className: "w-full px-5 py-3 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs border-gray-300 rounded-md",
         placeholder: "Enter year"
@@ -66051,15 +66051,51 @@ var Table = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Table);
 
-  function Table() {
+  function Table(props) {
+    var _this;
+
     _classCallCheck(this, Table);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      error: null,
+      isLoaded: false,
+      data: []
+    };
+    return _this;
   }
 
   _createClass(Table, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var url = "./api/spacex";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          isLoaded: true,
+          data: result
+        });
+      }, // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      function (error) {
+        _this2.setState({
+          isLoaded: true,
+          error: error
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this$state = this.state,
+          error = _this$state.error,
+          isLoaded = _this$state.isLoaded,
+          data = _this$state.data;
+      console.log(data);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flex flex-col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66084,27 +66120,20 @@ var Table = /*#__PURE__*/function (_Component) {
       }, "Launch Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      }, "Launch Success"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        className: "bg-white"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "FalconSat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "2006"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "False")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        className: "bg-gray-50"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "FalconSat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "2006"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-      }, "False"))))))));
+      }, "Launch Success"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, data.map(function (launch) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          className: "bg-white",
+          key: launch.flight_number
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+        }, launch.flight_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+        }, launch.mission_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+        }, launch.launch_year), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+        }, launch.launch_success ? "True" : "False"));
+      })))))));
     }
   }]);
 
