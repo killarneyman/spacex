@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/spacex', 'SpaceXController@index');
+Route::get('/spacex/{year?}', 'SpaceXController@index');
