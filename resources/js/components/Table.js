@@ -42,6 +42,8 @@ export default class Table extends Component {
 
         this.config = {
             page_size: 20,
+            show_pagination: true,
+            pagination: 'advance',
             length_menu: [ 10, 20, 50 ],
             button: {
                 excel: false,
@@ -53,10 +55,17 @@ export default class Table extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidUpdate(prevProps) {
+        if (prevProps.year !== this.props.year) {
+          this.load(this.props.year)
+        }
+      
+      }
+
+    load(year) {
         let url = "./api/spacex";
 
-        if(this.props.year) {
+        if(year) {
             url += '/' + this.props.year;
         }
 
@@ -79,6 +88,10 @@ export default class Table extends Component {
                     });
                 }
             )
+    }
+
+    componentDidMount() {
+        this.load(this.props.year)
     }
 
     render() {

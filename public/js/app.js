@@ -73746,33 +73746,51 @@ var SpaceX = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      year: null
+      year: null,
+      yearValue: 2020
     };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SpaceX, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState({
+        yearValue: event.target.value
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      this.setState({
+        year: this.state.yearValue
+      });
+      event.preventDefault();
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "mt-8 sm:flex"
+        className: "mt-8 sm:flex",
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "emailAddress",
+        htmlFor: "year",
         className: "sr-only"
-      }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "emailAddress",
-        name: "email",
-        type: "email",
-        autoComplete: "email",
-        required: true,
+      }, "Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "year",
+        name: "year",
+        type: "year",
+        value: this.state.yearValue,
+        onChange: this.handleChange,
         className: "w-full px-5 py-3 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs border-gray-300 rounded-md",
         placeholder: "Enter year"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit",
         className: "w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       }, "Search"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
         year: this.state.year
@@ -73872,6 +73890,8 @@ var Table = /*#__PURE__*/function (_Component) {
     }];
     _this.config = {
       page_size: 20,
+      show_pagination: true,
+      pagination: 'advance',
       length_menu: [10, 20, 50],
       button: {
         excel: false,
@@ -73888,13 +73908,20 @@ var Table = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Table, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.year !== this.props.year) {
+        this.load(this.props.year);
+      }
+    }
+  }, {
+    key: "load",
+    value: function load(year) {
       var _this2 = this;
 
       var url = "./api/spacex";
 
-      if (this.props.year) {
+      if (year) {
         url += '/' + this.props.year;
       }
 
@@ -73914,6 +73941,11 @@ var Table = /*#__PURE__*/function (_Component) {
           error: error
         });
       });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.load(this.props.year);
     }
   }, {
     key: "render",
