@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@ashvin27/react-datatable@^1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@ashvin27/react-datatable/-/react-datatable-1.5.3.tgz#80b19dac86845bb234107bf75c2dd148679eadc2"
+  integrity sha512-GvjGX9FkWbeVtEIlaDyv2eLHv7uqgGLD1T+NdRBxmFKVQYj64VjsphkVRSUeE1RHdhjzFym+VpnG8IM/jzJ7tw==
+  dependencies:
+    lodash "^4.17.19"
+
 "@babel/code-frame@^7.14.5":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"
@@ -4291,7 +4298,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5:
+lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
